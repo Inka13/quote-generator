@@ -1,0 +1,59 @@
+
+  	
+<html>
+  <head>
+    <title>Quotes Generator</title>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    </head>
+  <body>
+    
+    <div class="container">
+      <div id="main">
+  	<div class="quote">"<span id="citat">If you can dream it, you can achieve it.</span>"</div>
+        <div class="name">~ <span id="ime">Zig Ziglar</span></div></div>
+      <div class="tweet"><a href="#" id="twitter"><img src="https://businessbloomer.com/wp-content/uploads/2017/03/Twitter_Logo_White_On_Image.png"></a><div id="button">Next</div></div>
+      
+    </div>
+  </body>
+<script>
+var colors = ["rgba(0, 153, 204, 0.5)", "rgba(255, 102, 0, 0.5)", "rgba(0, 204, 0, 0.5)", "rgba(255, 102, 102, 0.5)", "rgba(0, 102, 255, 0.5)", "rgba(255, 204, 0, 0.5)", "rgba(0, 153, 51, 0.5)", "rgba(255, 0, 0, 0.5)", "rgba(204, 0, 102, 0.5)", "rgba(204, 0, 204, 0.5)"]
+var endpoint = 'https://gist.githubusercontent.com/Inka13/6255c9ebc09b42652380f5793eaa4290/raw/324667c26d40b69acd0167eb84996d59d57c438e/quotes.json';
+    const quotes = [];
+
+        
+        
+ fetch(endpoint)
+
+  .then(blob => blob.json())
+  
+  .then(data => quotes.push(...data))
+
+
+ function findQuotes(citati, r) {
+ 	return	citati[Object.keys(quotes)[r]];
+ 	
+ }
+ function displayQuote() {
+ 	var r =  Math.floor(Math.random()*quotes.length+1); 
+ 	var quote = findQuotes(quotes, r);
+ 	ime.textContent = quote.name;
+ 	citat.textContent = quote.quote;
+ 	var c = colors[Math.floor(Math.random()*colors.length+1)];
+    main.style.background = c;
+ }
+function tweetQuote() {
+  twitter.setAttribute("href","https://twitter.com/intent/tweet/?text=" + citat.textContent + "  ~ " + ime.textContent);
+}
+  const main = document.querySelector('#main');
+  const next = document.querySelector('#button');
+  const citat = document.querySelector('#citat');
+  const ime = document.querySelector('#ime');
+  
+  const twitter = document.querySelector('#twitter');
+  next.addEventListener('click', displayQuote);
+  twitter.addEventListener('click', tweetQuote);
+  
+ </script>
+ 
+</html>
